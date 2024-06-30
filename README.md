@@ -45,6 +45,8 @@ The API can be accessed locally at:
 http://localhost:56508/product/index.html
 ```
 
+The API is fully documented using Swagger, which provides a detailed overview of available endpoints, request models, and response statuses. Please review the Swagger documentation to validate response HTTP statuses and understand the expected behavior of the API
+
 ![image](https://github.com/elmauro/product-service/assets/9219845/d76f5338-0a28-4627-a9bc-25eec308b6b4)
 
 
