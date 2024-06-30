@@ -73,3 +73,30 @@ To update product details, use the PUT method with the new parameters in the JSO
 ![image](https://github.com/elmauro/product-service/assets/9219845/3e4b6dbd-92a3-4c88-aa51-dbff8622d21d)
 
 Execute, and then repeat the GET method to see the updated product information.
+
+## Logs
+
+You can view the logs from within the Docker container using the following command
+
+```sh
+docker logs [container_id]
+```
+
+![image](https://github.com/elmauro/product-service/assets/9219845/ddc76ad8-facd-45ca-af64-5f464af6620b)
+
+![image](https://github.com/elmauro/product-service/assets/9219845/0c46bcb0-1595-4e82-b22a-2f9c002927cd)
+
+
+
+## Mock Service
+
+Access the Mock Discount Service at the following URL:
+
+https://6680a0be56c2c76b495c7127.mockapi.io/v1/product
+
+The API returns data based on the first discount value provided in the query
+
+![image](https://github.com/elmauro/product-service/assets/9219845/7470de9f-3088-43dc-a9a5-deaf7a5df402)
+
+
+
