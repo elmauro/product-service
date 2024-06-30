@@ -60,7 +60,7 @@ Execute the request and the method will respond with information about the creat
 To retrieve product data, use the GET method with the productId parameter
 
 ```sh
-http://localhost:56508/v1/Product?productId=c5f8e2e8-e4ed-4eef-8088-8d2684f4e71
+http://localhost:56508/v1/Product?productId=c5f8e2e8-e4ed-4eef-8088-8d2684f4e71b
 ```
 
 ![image](https://github.com/elmauro/product-service/assets/9219845/dd68633f-82bb-4cd2-853c-5a5315f1470b)
