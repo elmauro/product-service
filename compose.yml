@@ -1,0 +1,39 @@
+version: '3.7'
+
+# Allows these services to be compatible with existing personal services (mesh)
+networks:
+  personal-services:
+    driver: bridge
+
+volumes:
+  postgresql-data-product:
+
+services:
+  product:
+    container_name: product
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: unless-stopped
+    ports:
+      - 56508:56508
+    networks:
+    - personal-services
+    environment:
+      ASPNETCORE_ENVIRONMENT: "DockerDev"
+
+  product-postgres:
+    image: postgres:13
+    container_name: product-postgres
+    restart: unless-stopped
+    # mounts db data to file system so data is not lost when re-creating the container.
+    volumes:
+      - postgresql-data-product:/var/lib/postgresql/data
+      - ./.db:/scripts
+    environment:
+      POSTGRES_USER: product
+      POSTGRES_PASSWORD: password
+    ports:
+      - "28515:5432"
+    networks:
+      - personal-services

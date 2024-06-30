@@ -1,0 +1,22 @@
+# docker-related files
+.dockerignore
+Dockerfile
+
+# c# files
+**/obj/
+**/bin/
+
+**/.toolstarget
+**/launchSettings.json
+
+**/.vs
+**/.vscode
+
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+
+.env
