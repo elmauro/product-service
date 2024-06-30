@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "MyAccount.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+      }
+    }
+  }
+}
