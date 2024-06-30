@@ -7,7 +7,7 @@ using MC.ProductService.API.Options;
 using MC.ProductService.API.Controllers.v1;
 using MC.ProductService.API.Infrastructure;
 
-namespace MC.ProductService.API.Application.v1
+namespace MC.ProductService.API.Services.v1
 {
     public interface IProductService
     {

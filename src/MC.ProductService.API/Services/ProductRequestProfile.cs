@@ -2,7 +2,7 @@
 using MC.ProductService.API.ClientModels;
 using MC.ProductService.API.Data.Models;
 
-namespace MC.ProductService.API.Application
+namespace MC.ProductService.API.Services
 {
     /// <summary>
     /// Configures mappings for the product data transfer object to the product entity model.

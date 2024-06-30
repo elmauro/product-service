@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using MC.ProductService.API.Options;
 using MC.ProductService.API.Data.Repositories;
-using MC.ProductService.API.Application.v1;
+using MC.ProductService.API.Services.v1;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using MyAccount.Web.Validators;

@@ -1,5 +1,5 @@
 ﻿using MC.ProductService.API.ClientModels;
-using MC.ProductService.API.Application.v1;
+using MC.ProductService.API.Services.v1;
 using MC.ProductService.API.Options;
 using Microsoft.AspNetCore.Mvc;
 namespace MC.ProductService.API.Controllers.v1

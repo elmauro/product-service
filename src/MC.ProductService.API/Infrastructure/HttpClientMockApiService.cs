@@ -20,7 +20,6 @@ namespace MC.ProductService.API.Infrastructure
     /// </summary>
     public class HttpClientMockApiService : IHttpClientMockApi
     {
-        private readonly ILogger<HttpClientMockApiService> _logger;
         private readonly HttpClient _client;
 
         private JsonSerializerOptions jsonOptions = new JsonSerializerOptions
@@ -34,16 +33,12 @@ namespace MC.ProductService.API.Infrastructure
         /// Initializes a new instance of the <see cref="HttpClientMockApiService"/> class.
         /// </summary>
         /// <param name="httpClient">The HTTP client used to make requests.</param>
-        /// <param name="logger">The logger used to log information.</param>
         /// <exception cref="ArgumentNullException">Thrown when the logger is null.</exception>
 
         public HttpClientMockApiService(
-            HttpClient httpClient,
-            ILogger<HttpClientMockApiService> logger)
+            HttpClient httpClient)
         {
             _client = httpClient;
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
         }
 
         public async Task<(bool IsSuccess, List<MockProductResponse> SuccessResult)> GetProductDiscountAsync()
@@ -64,31 +59,11 @@ namespace MC.ProductService.API.Infrastructure
             var result = (IsSuccess: false, SuccessResult: default(T));
             var httpResponse = await request();
 
-            // log failures
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                _logger.LogCritical(
-                    "Encountered an error attempting to make a request {@ResponseDetails}",
-                    new
-                    {
-                        httpResponse.StatusCode,
-                        httpResponse.ReasonPhrase,
-                        Content = await httpResponse.Content.ReadAsStringAsync()
-                    }
-                );
-            }
-            else
-            {
-                result.IsSuccess = true;
+            result.IsSuccess = true;
 
-                // De-serialize using our json settings
-
-                result.SuccessResult = await httpResponse.Content
-                    .ReadFromJsonAsync<T>(jsonOptions);
-
-                // log responses for debugging, if you like
-                _logger.LogDebug("{@ClientResponse}", result.SuccessResult);
-            }
+            // De-serialize using our json settings
+            result.SuccessResult = await httpResponse.Content
+                .ReadFromJsonAsync<T>(jsonOptions);
 
             return result;
         }
