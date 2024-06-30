@@ -2,7 +2,7 @@
 using MC.Insurance.ApplicationServicesTest.Fixtures;
 using MC.ProductService.API.ClientModels;
 using MC.ProductService.API.Data;
-using MC.ProductService.API.Validators;
+using MC.ProductService.API.Options;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;

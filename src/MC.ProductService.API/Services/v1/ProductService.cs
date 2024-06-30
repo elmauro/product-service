@@ -3,7 +3,7 @@ using MC.ProductService.API.ClientModels;
 using MC.ProductService.API.Data.Repositories;
 using MC.ProductService.API.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using MC.ProductService.API.Validators;
+using MC.ProductService.API.Options;
 using MC.ProductService.API.Controllers.v1;
 using MC.ProductService.API.Infrastructure;
 

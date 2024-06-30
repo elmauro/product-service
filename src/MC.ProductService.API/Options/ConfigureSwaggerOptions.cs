@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace MC.ProductService.API.Validators
+namespace MC.ProductService.API.Options
 {
     /// <summary>
     /// Provides configuration for Swagger documentation.

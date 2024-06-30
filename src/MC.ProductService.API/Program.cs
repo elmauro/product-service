@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using MC.ProductService.API.Infrastructure;
+using MC.ProductService.API.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
