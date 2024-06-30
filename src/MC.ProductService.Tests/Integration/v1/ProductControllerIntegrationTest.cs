@@ -39,7 +39,7 @@ namespace MC.ProductService.Tests.Integration.v1
         public async Task GetProductReturnsOk()
         {
             // Arrange
-            var productToAdd = ProductMock.GetProduct();
+            var productToAdd = ProductMockingData.GetProduct();
 
             // Use the factory to create a scope and resolve the ProductDBContext
             using var scope = _factory.Services.CreateScope();
@@ -74,7 +74,7 @@ namespace MC.ProductService.Tests.Integration.v1
         public async Task AddProductReturnsBadRequest()
         {
             // Arrange
-            var productToAdd = ProductMock.GetProductRequest();
+            var productToAdd = ProductMockingData.GetProductRequest();
             productToAdd.Name = string.Empty;
 
             var client = _factory.CreateClient();
@@ -90,7 +90,7 @@ namespace MC.ProductService.Tests.Integration.v1
         public async Task AddProductReturnsOk()
         {
             // Arrange
-            var productToAdd = ProductMock.GetProductRequest();
+            var productToAdd = ProductMockingData.GetProductRequest();
 
             // Use the factory to create a scope and resolve the ProductDBContext
             using var scope = _factory.Services.CreateScope();
@@ -126,7 +126,7 @@ namespace MC.ProductService.Tests.Integration.v1
         {
             // Arrange
             var productId = Guid.NewGuid().ToString();
-            var productToUpdate = ProductMock.GetProductRequest();
+            var productToUpdate = ProductMockingData.GetProductRequest();
 
             var client = _factory.CreateClient();
 
@@ -142,7 +142,7 @@ namespace MC.ProductService.Tests.Integration.v1
         {
             // Arrange
             var productId = Guid.NewGuid().ToString();
-            var productToUpdate = ProductMock.GetProductRequest();
+            var productToUpdate = ProductMockingData.GetProductRequest();
             productToUpdate.Name = string.Empty;
 
             var client = _factory.CreateClient();
@@ -158,7 +158,7 @@ namespace MC.ProductService.Tests.Integration.v1
         public async Task UpdateProductReturnsOk()
         {
             // Arrange
-            var productToUpdate = ProductMock.GetProductRequest();
+            var productToUpdate = ProductMockingData.GetProductRequest();
 
             // Use the factory to create a scope and resolve the ProductDBContext
             using var scope = _factory.Services.CreateScope();

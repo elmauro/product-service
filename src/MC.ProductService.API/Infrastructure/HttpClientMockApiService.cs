@@ -33,7 +33,6 @@ namespace MC.ProductService.API.Infrastructure
         /// Initializes a new instance of the <see cref="HttpClientMockApiService"/> class.
         /// </summary>
         /// <param name="httpClient">The HTTP client used to make requests.</param>
-        /// <exception cref="ArgumentNullException">Thrown when the logger is null.</exception>
 
         public HttpClientMockApiService(
             HttpClient httpClient)
