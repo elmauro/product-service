@@ -3,10 +3,14 @@
 
 Before you begin, ensure that your system meets the following prerequisites:
 
+**Running locally with Visual Studio 2022**
 - Windows 10 installed
 - NET 8 SDK installed
 - Docker Desktop installed
 - Visual Studio 2022 Community Edition installed
+
+**Running locally with Docker Desktop**
+- Docker Desktop installed
 
 ## Installation
 
