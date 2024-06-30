@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MC.ProductService.API.ClientModels;
 
-namespace MyAccount.Web.Validators
+namespace MC.ProductService.API.Validators
 {
     public class ProductValidator : AbstractValidator<ProductRequest>
     {

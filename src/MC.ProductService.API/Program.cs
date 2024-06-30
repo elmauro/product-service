@@ -1,12 +1,11 @@
 using MC.ProductService.API.Data;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
-using MC.ProductService.API.Options;
+using MC.ProductService.API.Validators;
 using MC.ProductService.API.Data.Repositories;
 using MC.ProductService.API.Services.v1;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-using MyAccount.Web.Validators;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;

@@ -1,4 +1,4 @@
-﻿namespace MC.ProductService.API.Options
+﻿namespace MC.ProductService.API.Validators
 {
     /// <summary>
     /// Defines a generic interface for API responses that encapsulate the primary data in a 'data' property.
