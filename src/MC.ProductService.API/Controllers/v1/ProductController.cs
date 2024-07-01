@@ -57,6 +57,7 @@ namespace MC.ProductService.API.Controllers.v1
         [HttpPut("{productId:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromRoute] Guid productId, [FromBody] ProductRequest product)
         {
             return await _productService.UpdateProductAsync(productId, product);
