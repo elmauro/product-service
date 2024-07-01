@@ -65,6 +65,10 @@ namespace MC.ProductService.Tests.Integration.v1
             actionDataResponse.Data.Stock.Should().Be(productToAdd.Stock);
             actionDataResponse.Data.Description.Should().Be(productToAdd.Description);
             actionDataResponse.Data.Price.Should().Be(productToAdd.Price);
+            actionDataResponse.Data.CreatedBy.Should().Be(productToAdd.CreatedBy);
+            actionDataResponse.Data.LastUpdatedBy.Should().Be(productToAdd.LastUpdatedBy);
+            actionDataResponse.Data.CreatedAt.Should().BeCloseTo(productToAdd.CreatedAt, TimeSpan.FromSeconds(1));
+            actionDataResponse.Data.LastUpdatedAt.Should().BeCloseTo(productToAdd.LastUpdatedAt, TimeSpan.FromSeconds(1));
 
             dbContext.Products.Remove(productToAdd);
             await dbContext.SaveChangesAsync();

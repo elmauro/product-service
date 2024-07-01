@@ -3,7 +3,7 @@
 namespace MC.ProductService.API.ClientModels
 {
     /// <summary>
-    /// Represents a request model for capturing product-related data from clients or for internal data handling.
+    /// Represents a request model for capturing product data from clients.
     /// This class is typically used for creating or updating product records.
     /// </summary>
     public class ProductRequest
