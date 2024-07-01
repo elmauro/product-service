@@ -10,7 +10,7 @@ namespace MC.ProductService.Tests.Fixtures
     /// with methods for setting up a clean database.
     /// Inherits from WebApplicationFactory with the startup class, Program.
     /// </summary>
-    public class ProductApplicationFactory : WebApplicationFactory<Program>
+    public class ProductApplicationFixture : WebApplicationFactory<Program>
     {
         // <summary>
         /// Configures the web host for testing. This method is called by the constructor of WebApplicationFactory.

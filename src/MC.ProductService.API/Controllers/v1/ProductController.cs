@@ -24,7 +24,7 @@ namespace MC.ProductService.API.Controllers.v1
         /// <returns>The product information if found; otherwise, a 404 status code.</returns>
         [HttpGet("{productId:guid}")]
         [ProducesResponseType(typeof(IActionDataResponse<ProductView>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(Guid productId)
         {
             return await _productService.GetProductByIdAsync(productId);
@@ -57,7 +57,7 @@ namespace MC.ProductService.API.Controllers.v1
         [HttpPut("{productId:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse),  StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromRoute] Guid productId, [FromBody] ProductRequest product)
         {
             return await _productService.UpdateProductAsync(productId, product);
