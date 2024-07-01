@@ -5,14 +5,25 @@ Before you begin, ensure that your system meets the following prerequisites:
 
 **Running locally with Visual Studio 2022**
 - Windows 10 installed
-- NET 8 SDK installed
-- Docker Desktop installed
+- At least 4 GB of RAM (8 GB or more recommended)
+- Sufficient disk space to install the .NET SDK, development tools, and project dependencies (at least 10 GB of free space recommended)
+- NET 8 SDK installed. Download and install the .NET 8 SDK from the official .NET website: https://dotnet.microsoft.com/download/dotnet/8.0
+- Docker or Docker Desktop installed https://www.docker.com/
+- docker-compose
+- Git (version control): [Download from Git](https://git-scm.com/)
 - Visual Studio 2022 Community Edition installed
 
 **Running locally with Docker Desktop**
-- Docker Desktop installed
+- Docker or Docker Desktop installed https://www.docker.com/
+- docker-compose
+- Git (version control): [Download from Git](https://git-scm.com/)
 
 ## Installation
+
+**Clone the repository**
+```sh
+git clone https://github.com/elmauro/product-service.git
+```
 
 Use Docker Compose to launch the database
 
