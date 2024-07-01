@@ -23,20 +23,25 @@ namespace MC.ProductService.API.Infrastructure
     {
         private readonly IMemoryCache _memoryCache;
         private const string CacheKey = "StatusDictionary";
+        private readonly ILogger<StatusCacheService> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StatusCacheService"/> class.
         /// </summary>
         /// <param name="memoryCache">The memory cache instance to be used for caching.</param>
-        public StatusCacheService(IMemoryCache memoryCache)
+        /// <param name="logger">The logger instance for logging.</param>
+        public StatusCacheService(IMemoryCache memoryCache, ILogger<StatusCacheService> logger)
         {
             _memoryCache = memoryCache;
+            _logger = logger;
         }
 
         public string GetStatusName(int statusKey)
         {
-            if (!_memoryCache.TryGetValue(CacheKey, out Dictionary<int, string> statusDictionary))
+            if (!_memoryCache.TryGetValue(CacheKey, out Dictionary<int, string>? statusDictionary))
             {
+                _logger.LogInformation("Cache miss for status dictionary. Regenerating...");
+
                 // The cache entry has expired or doesn't exist, so generate a new dictionary
                 statusDictionary = GetStatusDictionary();
 
@@ -48,7 +53,15 @@ namespace MC.ProductService.API.Infrastructure
                 _memoryCache.Set(CacheKey, statusDictionary, cacheEntryOptions);
             }
 
-            return statusDictionary.ContainsKey(statusKey) ? statusDictionary[statusKey] : "Unknown";
+            if (statusDictionary != null && statusDictionary.TryGetValue(statusKey, out string? statusName))
+            {
+                return statusName;
+            }
+            else
+            {
+                _logger.LogWarning("Status key {StatusKey} not found in status dictionary", statusKey);
+                return "Unknown";
+            }
         }
 
         /// <summary>

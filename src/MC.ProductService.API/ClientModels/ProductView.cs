@@ -5,12 +5,9 @@ namespace MC.ProductService.API.ClientModels
 {
     /// <summary>
     /// Provides a lambda expression that projects a <see cref="Product"/> entity to a <see cref="ProductView"/> model.
-    /// This static method is typically used for transforming database entities into more suitable formats
-    /// for client-facing applications, ensuring that sensitive or irrelevant entity data is not exposed.
     /// </summary>
     /// <returns>
-    /// An expression that maps properties from the <see cref="Product"/> entity to the <see cref="ProductView"/> model,
-    /// enabling efficient querying and data transformation directly in database queries.
+    /// An expression that maps properties from the <see cref="Product"/> entity to the <see cref="ProductView"/> model
     /// </returns>
     public class ProductView
     {
@@ -48,14 +45,25 @@ namespace MC.ProductService.API.ClientModels
         public int Discount { get; set; }
 
         /// <summary>
-        /// Gets or sets the final price of the product after applying the discount. This value accounts
-        /// for any reductions through discounts and is the amount that the customer would be expected to pay. 
-        /// This is a calculated field.
+        /// Gets or sets the final price of the product after applying the discount.
+        /// Is the amount that the customer would be expected to pay. This is a calculated field.
         /// </summary>
         /// <value>
         /// The final price of the product after discount.
         /// </value>
         public decimal FinalPrice { get; set; }
+
+        /// <see cref="Product.CreatedBy"/>
+        public string CreatedBy { get; set; }
+
+        /// <see cref="Product.LastUpdatedBy"/>
+        public string LastUpdatedBy { get; set; }
+
+        /// <see cref="Product.CreatedAt"/>
+        public DateTimeOffset CreatedAt { get; set; }
+
+        /// <see cref="Product.LastUpdatedAt"/>
+        public DateTimeOffset LastUpdatedAt { get; set; }
 
         public static Expression<Func<Product, ProductView>> Project() => product => new ProductView
         {
@@ -64,7 +72,11 @@ namespace MC.ProductService.API.ClientModels
             Status = product.Status,
             Stock = product.Stock,
             Description = product.Description,
-            Price = product.Price
+            Price = product.Price,
+            CreatedBy = product.CreatedBy,
+            LastUpdatedBy = product.LastUpdatedBy,
+            CreatedAt = product.CreatedAt,
+            LastUpdatedAt = product.LastUpdatedAt
         };
     }
 }

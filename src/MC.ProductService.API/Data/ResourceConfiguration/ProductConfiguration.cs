@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace MC.ProductService.API.Data.ResourceConfiguration
 {
     /// <summary>
-    /// Configures entity mapping for the <see cref="Product"/> class specifically tailored for PostgreSQL.
+    /// Configures entity mapping for the <see cref="Product"/> class.
     /// This configuration extends <see cref="PostgresResourceConfiguration{Product}"/> to include
     /// additional indexing specific to the Product entity.
     /// </summary>

@@ -4,7 +4,7 @@ using MC.ProductService.API.Data.Models;
 namespace MC.ProductService.API.Data
 {
     /// <summary>
-    /// Provides context for product-related database interactions, encapsulating configuration 
+    /// Provides context for product database interactions, encapsulating configuration
     /// and functionality for accessing the database through Entity Framework Core.
     /// </summary>
     /// <remarks>
