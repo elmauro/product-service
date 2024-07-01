@@ -20,6 +20,11 @@ Before you begin, ensure that your system meets the following prerequisites:
 
 ## Installation
 
+**Clone the repository**
+```sh
+git clone https://github.com/elmauro/product-service.git
+```
+
 Use Docker Compose to launch the database
 
 ```sh
