@@ -12,7 +12,7 @@ namespace MC.ProductService.API.Infrastructure
         /// Asynchronously gets the product discount information.
         /// </summary>
         /// <returns>A task that represents the asynchronous operation. The task result contains a tuple with a success flag and the list of product responses.</returns>
-        public Task<(bool IsSuccess, List<MockProductResponse> SuccessResult)> GetProductDiscountAsync();
+        public Task<(bool IsSuccess, List<MockProductResponse>? SuccessResult)> GetProductDiscountAsync();
     }
 
     /// <summary>
@@ -21,6 +21,7 @@ namespace MC.ProductService.API.Infrastructure
     public class HttpClientMockApiService : IHttpClientMockApi
     {
         private readonly HttpClient _client;
+        private readonly ILogger<HttpClientMockApiService> _logger;
 
         private JsonSerializerOptions jsonOptions = new JsonSerializerOptions
         {
@@ -33,14 +34,17 @@ namespace MC.ProductService.API.Infrastructure
         /// Initializes a new instance of the <see cref="HttpClientMockApiService"/> class.
         /// </summary>
         /// <param name="httpClient">The HTTP client used to make requests.</param>
+        /// <param name="logger">The logger instance for logging.</param>
 
         public HttpClientMockApiService(
-            HttpClient httpClient)
+            HttpClient httpClient,
+            ILogger<HttpClientMockApiService> logger)
         {
             _client = httpClient;
+            _logger = logger;
         }
 
-        public async Task<(bool IsSuccess, List<MockProductResponse> SuccessResult)> GetProductDiscountAsync()
+        public async Task<(bool IsSuccess, List<MockProductResponse>? SuccessResult)> GetProductDiscountAsync()
         {
             return await ExecuteAsync<List<MockProductResponse>>(async () =>
                 await _client.GetAsync(ProductRoute)
@@ -53,18 +57,33 @@ namespace MC.ProductService.API.Infrastructure
         /// <typeparam name="T">The type of the success result.</typeparam>
         /// <param name="request">The function that performs the HTTP request.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains a tuple with a success flag and the success result.</returns>
-        private async Task<(bool IsSuccess, T SuccessResult)> ExecuteAsync<T>(Func<Task<HttpResponseMessage>> request)
+        private async Task<(bool IsSuccess, T? SuccessResult)> ExecuteAsync<T>(Func<Task<HttpResponseMessage>> request)
         {
             var result = (IsSuccess: false, SuccessResult: default(T));
-            var httpResponse = await request();
 
-            result.IsSuccess = true;
+            try
+            {
+                var httpResponse = await request();
 
-            // De-serialize using our json settings
-            result.SuccessResult = await httpResponse.Content
-                .ReadFromJsonAsync<T>(jsonOptions);
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    _logger.LogWarning("HTTP request failed with status code {StatusCode}", httpResponse.StatusCode);
+                    return result;
+                }
 
-            return result;
+                result.IsSuccess = true;
+
+                // De-serialize using our json settings
+                result.SuccessResult = await httpResponse.Content
+                    .ReadFromJsonAsync<T>(jsonOptions);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An unexpected error occurred");
+                return result;
+            }
         }
     }
 }

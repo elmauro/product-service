@@ -16,13 +16,12 @@ namespace MC.ProductService.API.Controllers.v1
         }
 
         /// <summary>
-        /// Allows to get the Product Information.
+        /// Retrieves the product information by ID.
         /// </summary>
-        /// <remarks>
-        /// </remarks>
+        /// <param name="productId">The unique identifier of the product.</param>
         /// <response code="200">Returns the product information.</response> 
         /// <response code="404">The product information was not found.</response>
-        /// <returns></returns>
+        /// <returns>The product information if found; otherwise, a 404 status code.</returns>
         [HttpGet("{productId}")]
         [ProducesResponseType(typeof(IActionDataResponse<ProductView>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -32,13 +31,12 @@ namespace MC.ProductService.API.Controllers.v1
         }
 
         /// <summary>
-        /// Allows to add a new Product Information.
+        /// Adds a new product.
         /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <response code="201">Returns the product information.</response> 
-        /// <response code="400">The product information was not valid data.</response>
-        /// <returns></returns>
+        /// <param name="product">The product information to add.</param>
+        /// <response code="201">The product was successfully created.</response> 
+        /// <response code="400">The product information was not valid.</response>
+        /// <returns>The created product information.</returns>
         [HttpPost]
         [ProducesResponseType(typeof(IActionDataResponse<ProductRequest>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
@@ -48,14 +46,14 @@ namespace MC.ProductService.API.Controllers.v1
         }
 
         /// <summary>
-        /// Allows to update thre Product Information.
+        /// Updates an existing product.
         /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <response code="204">Returns no content.</response>
-        /// <response code="400">The product information was not valid data.</response>
+        /// <param name="productId">The unique identifier of the product to update.</param>
+        /// <param name="product">The product information to update.</param>
+        /// <response code="204">The product was successfully updated.</response>
+        /// <response code="400">The product information was not valid.</response>
         /// <response code="404">The product information was not found.</response>
-        /// <returns></returns>
+        /// <returns>No content if the update is successful; otherwise, an error status code.</returns>
         [HttpPut("{productId:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
