@@ -12,36 +12,32 @@ namespace MC.ProductService.API.Services.v1
     public interface IProductService
     {
         /// <summary>
-        /// Asynchronously retrieves a product by its ID.
+        /// Retrieves a product by its ID.
         /// </summary>
         /// <param name="productId">The unique identifier for the product to retrieve.</param>
         /// <returns>
-        /// A task that represents the asynchronous operation. The task result contains the <see cref="ProductView"/> 
+        /// The result contains the <see cref="ProductView"/> 
         /// corresponding to the specified product ID. Returns null if no product is found with the provided ID.
         /// </returns>
         Task<IActionResult> GetProductByIdAsync(Guid productId);
 
         /// <summary>
-        /// Asynchronously adds a new product to the database.
+        /// Adds a new product to the database.
         /// </summary>
         /// <param name="product">The product information used to create a new product entry. This data is encapsulated
         /// in a <see cref="ProductRequest"/> object.</param>
         /// <returns>
-        /// A task that represents the asynchronous operation. The task completes once the product has been successfully
-        /// added to the database.
+        /// The product added to the database.
         /// </returns>
         Task<IActionResult> AddProductAsync(ProductRequest product);
 
         /// <summary>
-        /// Asynchronously updates an existing product in the database.
+        /// Updates an existing product in the database.
         /// </summary>
         /// <param name="productId">The product ID to update</param>
-        /// <param name="product">The product information to update. The product to update is identified by the ID 
-        /// within the <see cref="ProductRequest"/> object, and the other details in the object represent the new 
-        /// values to be stored.</param>
+        /// <param name="product">The product information to update.
+        /// within the <see cref="ProductRequest"/> object</param>
         /// <returns>
-        /// A task that represents the asynchronous operation. The task completes once the product has been successfully
-        /// updated in the database.
         /// </returns>
         Task<IActionResult> UpdateProductAsync(Guid productId, ProductRequest product);
     }
@@ -121,7 +117,7 @@ namespace MC.ProductService.API.Services.v1
         {
             try
             {
-                // Map the incoming product DTO to the Product entity model using an object mapper.
+                // Map the incoming product DTO to the Product entity model.
                 var newProduct = _mapper.Map<Product>(product);
 
                 // Set the 'CreatedBy' property and the 'LastUpdatedBy' property to the current system user, indicating who created the product.

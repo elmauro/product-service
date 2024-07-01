@@ -11,7 +11,7 @@ namespace MC.ProductService.API.Infrastructure
         /// <summary>
         /// Asynchronously gets the product discount information.
         /// </summary>
-        /// <returns>A task that represents the asynchronous operation. The task result contains a tuple with a success flag and the list of product responses.</returns>
+        /// <returns>The result contains a tuple with a success flag and the list of product responses.</returns>
         public Task<(bool IsSuccess, List<MockProductResponse>? SuccessResult)> GetProductDiscountAsync();
     }
 
@@ -56,7 +56,7 @@ namespace MC.ProductService.API.Infrastructure
         /// </summary>
         /// <typeparam name="T">The type of the success result.</typeparam>
         /// <param name="request">The function that performs the HTTP request.</param>
-        /// <returns>A task that represents the asynchronous operation. The task result contains a tuple with a success flag and the success result.</returns>
+        /// <returns>The result contains a tuple with a success flag and the success result.</returns>
         private async Task<(bool IsSuccess, T? SuccessResult)> ExecuteAsync<T>(Func<Task<HttpResponseMessage>> request)
         {
             var result = (IsSuccess: false, SuccessResult: default(T));
