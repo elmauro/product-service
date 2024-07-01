@@ -17,7 +17,6 @@
     }
 
     /// <summary>
-    /// Represents a generic API response structure that encapsulates the returned data within a data property.
     /// This class is intended to provide a consistent response format across different endpoints.
     /// </summary>
     /// <typeparam name="T">The type of the data being encapsulated in the API response.</typeparam>
