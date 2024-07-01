@@ -21,7 +21,7 @@ namespace MC.ProductService.Tests.Integration.v1
         }
 
         [Fact]
-        public async Task GetProductReturnsNoFound()
+        public async Task GetProductReturnsNotFound()
         {
             // Arrange
             var productId = Guid.NewGuid().ToString();
@@ -126,7 +126,7 @@ namespace MC.ProductService.Tests.Integration.v1
         }
 
         [Fact]
-        public async Task UpdateProductReturnsNoFound()
+        public async Task UpdateProductReturnsNotFound()
         {
             // Arrange
             var productId = Guid.NewGuid().ToString();
