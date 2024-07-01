@@ -19,7 +19,7 @@ namespace MC.ProductService.API.Services.v1
         /// A task that represents the asynchronous operation. The task result contains the <see cref="ProductView"/> 
         /// corresponding to the specified product ID. Returns null if no product is found with the provided ID.
         /// </returns>
-        Task<IActionResult> GetProductByIdAsync(string productId);
+        Task<IActionResult> GetProductByIdAsync(Guid productId);
 
         /// <summary>
         /// Asynchronously adds a new product to the database.
@@ -78,12 +78,12 @@ namespace MC.ProductService.API.Services.v1
             };
         }
 
-        public async Task<IActionResult> GetProductByIdAsync(string productId)
+        public async Task<IActionResult> GetProductByIdAsync(Guid productId)
         {
             try
             {
                 // Attempt to retrieve a product by its ID asynchronously.
-                var product = await _repository.GetProductViewByIdAsync(productId);
+                var product = await _repository.GetProductViewByIdAsync(productId.ToString());
 
                 if (product == null)
                     return new NotFoundResult();

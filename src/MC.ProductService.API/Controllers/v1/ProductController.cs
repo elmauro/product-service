@@ -22,10 +22,10 @@ namespace MC.ProductService.API.Controllers.v1
         /// <response code="200">Returns the product information.</response> 
         /// <response code="404">The product information was not found.</response>
         /// <returns>The product information if found; otherwise, a 404 status code.</returns>
-        [HttpGet("{productId}")]
+        [HttpGet("{productId:guid}")]
         [ProducesResponseType(typeof(IActionDataResponse<ProductView>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get(string productId)
+        public async Task<IActionResult> Get(Guid productId)
         {
             return await _productService.GetProductByIdAsync(productId);
         }
