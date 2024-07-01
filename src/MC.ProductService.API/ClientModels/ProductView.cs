@@ -12,7 +12,7 @@ namespace MC.ProductService.API.ClientModels
     public class ProductView
     {
         /// <see cref="Product.Name"/>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <see cref="Product.Status"/>
         public int Status { get; set; }
@@ -21,19 +21,19 @@ namespace MC.ProductService.API.ClientModels
         public int Stock { get; set; }
 
         /// <see cref="Product.Description"/>
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         /// <see cref="Product.Price"/>
         public int Price { get; set; }
 
         /// <see cref="Product.ProductId"/>
-        public string ProductId { get; set; }
+        public string ProductId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the status name of the product. This is a calculated field.
         /// </summary>
         /// <value>The status name of the product.</value>
-        public string StatusName { get; set; }
+        public string StatusName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the discount applied to the product. This is a percentage value that represents
@@ -54,10 +54,10 @@ namespace MC.ProductService.API.ClientModels
         public decimal FinalPrice { get; set; }
 
         /// <see cref="Product.CreatedBy"/>
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
 
         /// <see cref="Product.LastUpdatedBy"/>
-        public string LastUpdatedBy { get; set; }
+        public string LastUpdatedBy { get; set; } = string.Empty;
 
         /// <see cref="Product.CreatedAt"/>
         public DateTimeOffset CreatedAt { get; set; }

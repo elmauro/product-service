@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using System.Net.Http;
 
 namespace MC.ProductService.API.Infrastructure
 {
@@ -32,8 +33,8 @@ namespace MC.ProductService.API.Infrastructure
         /// <param name="logger">The logger instance for logging.</param>
         public StatusCacheService(IMemoryCache memoryCache, ILogger<StatusCacheService> logger)
         {
-            _memoryCache = memoryCache;
-            _logger = logger;
+            _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public string GetStatusName(int statusKey)

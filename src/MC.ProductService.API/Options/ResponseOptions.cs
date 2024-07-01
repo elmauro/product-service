@@ -34,15 +34,21 @@
     }
 
     /// <summary>
-    /// Represents a structured response for API requests that fail validation. It provides detailed 
-    /// information about the nature of the errors encountered during the validation process.
+    /// Represents a structured response for API requests that fail validation.
     /// </summary>
-    public class ValidationErrorResponse
+    public class ErrorResponse
     {
         public string? Type { get; set; }
         public string? Title { get; set; }
         public int? Status { get; set; }
-        public Dictionary<string, string[]>? Errors { get; set; }
         public string? TraceId { get; set; }
+    }
+
+    /// <summary>
+    /// It provides detailed information about the nature of the errors encountered during the validation process.
+    /// </summary>
+    public class ValidationErrorResponse : ErrorResponse
+    {
+        public Dictionary<string, string[]>? Errors { get; set; }
     }
 }

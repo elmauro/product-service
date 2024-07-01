@@ -59,16 +59,16 @@ namespace MC.ProductService.Tests.Integration.v1
 
             var actionDataResponse = await response.Content.ReadFromJsonAsync<ActionDataResponse<ProductView>>();
             actionDataResponse.Should().NotBeNull();
-            actionDataResponse.Data.Should().NotBeNull();
-            actionDataResponse.Data.Name.Should().Be(productToAdd.Name);
-            actionDataResponse.Data.Status.Should().Be(productToAdd.Status);
-            actionDataResponse.Data.Stock.Should().Be(productToAdd.Stock);
-            actionDataResponse.Data.Description.Should().Be(productToAdd.Description);
-            actionDataResponse.Data.Price.Should().Be(productToAdd.Price);
-            actionDataResponse.Data.CreatedBy.Should().Be(productToAdd.CreatedBy);
-            actionDataResponse.Data.LastUpdatedBy.Should().Be(productToAdd.LastUpdatedBy);
-            actionDataResponse.Data.CreatedAt.Should().BeCloseTo(productToAdd.CreatedAt, TimeSpan.FromSeconds(1));
-            actionDataResponse.Data.LastUpdatedAt.Should().BeCloseTo(productToAdd.LastUpdatedAt, TimeSpan.FromSeconds(1));
+            actionDataResponse?.Data.Should().NotBeNull();
+            actionDataResponse?.Data.Name.Should().Be(productToAdd.Name);
+            actionDataResponse?.Data.Status.Should().Be(productToAdd.Status);
+            actionDataResponse?.Data.Stock.Should().Be(productToAdd.Stock);
+            actionDataResponse?.Data.Description.Should().Be(productToAdd.Description);
+            actionDataResponse?.Data.Price.Should().Be(productToAdd.Price);
+            actionDataResponse?.Data.CreatedBy.Should().Be(productToAdd.CreatedBy);
+            actionDataResponse?.Data.LastUpdatedBy.Should().Be(productToAdd.LastUpdatedBy);
+            actionDataResponse?.Data.CreatedAt.Should().BeCloseTo(productToAdd.CreatedAt, TimeSpan.FromSeconds(1));
+            actionDataResponse?.Data.LastUpdatedAt.Should().BeCloseTo(productToAdd.LastUpdatedAt, TimeSpan.FromSeconds(1));
 
             dbContext.Products.Remove(productToAdd);
             await dbContext.SaveChangesAsync();
@@ -113,12 +113,12 @@ namespace MC.ProductService.Tests.Integration.v1
 
             var actionDataResponse = await response.Content.ReadFromJsonAsync<ActionDataResponse<ProductRequest>>();
             actionDataResponse.Should().NotBeNull();
-            actionDataResponse.Data.Should().NotBeNull();
-            actionDataResponse.Data.Name.Should().Be(productToAdd.Name);
-            actionDataResponse.Data.Status.Should().Be(productToAdd.Status);
-            actionDataResponse.Data.Stock.Should().Be(productToAdd.Stock);
-            actionDataResponse.Data.Description.Should().Be(productToAdd.Description);
-            actionDataResponse.Data.Price.Should().Be(productToAdd.Price);
+            actionDataResponse?.Data.Should().NotBeNull();
+            actionDataResponse?.Data.Name.Should().Be(productToAdd.Name);
+            actionDataResponse?.Data.Status.Should().Be(productToAdd.Status);
+            actionDataResponse?.Data.Stock.Should().Be(productToAdd.Stock);
+            actionDataResponse?.Data.Description.Should().Be(productToAdd.Description);
+            actionDataResponse?.Data.Price.Should().Be(productToAdd.Price);
 
             var productToRemove = await dbContext.Products.FindAsync(productId);
             dbContext.Products.Remove(productToRemove);
@@ -183,13 +183,12 @@ namespace MC.ProductService.Tests.Integration.v1
 
             var existingProduct = await dbContext.Products.FindAsync(productId);
 
-            existingProduct.ProductId.Should().Be(productId);
-            existingProduct.Name.Should().Be(productToUpdate.Name);
-            existingProduct.Status.Should().Be(productToUpdate.Status);
-            existingProduct.Stock.Should().Be(productToUpdate.Stock);
-            existingProduct.Description.Should().Be(productToUpdate.Description);
-            existingProduct.Price.Should().Be(productToUpdate.Price);
-
+            existingProduct?.ProductId.Should().Be(productId);
+            existingProduct?.Name.Should().Be(productToUpdate.Name);
+            existingProduct?.Status.Should().Be(productToUpdate.Status);
+            existingProduct?.Stock.Should().Be(productToUpdate.Stock);
+            existingProduct?.Description.Should().Be(productToUpdate.Description);
+            existingProduct?.Price.Should().Be(productToUpdate.Price);
 
             dbContext.Products.Remove(existingProduct);
             await dbContext.SaveChangesAsync();

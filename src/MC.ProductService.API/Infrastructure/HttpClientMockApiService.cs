@@ -40,8 +40,8 @@ namespace MC.ProductService.API.Infrastructure
             HttpClient httpClient,
             ILogger<HttpClientMockApiService> logger)
         {
-            _client = httpClient;
-            _logger = logger;
+            _client = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<(bool IsSuccess, List<MockProductResponse>? SuccessResult)> GetProductDiscountAsync()

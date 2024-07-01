@@ -9,12 +9,12 @@
         /// Gets or sets the product identifier.
         /// </summary>
         /// <value>The identifier of the product.</value>
-        public string ProductId { get; set; }
+        public string ProductId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the discount applied to the product.
         /// </summary>
         /// <value>The discount information of the product.</value>
-        public string Discount { get; set; }
+        public string Discount { get; set; } = string.Empty;
     }
 }

@@ -102,7 +102,7 @@ namespace MC.ProductService.API.Services.v1
                     product.FinalPrice = product.Price * (100 - product.Discount) / 100;
 
                     // Return the updated product object with the discount applied.
-                    return new OkObjectResult(new { data = product });
+                    return new OkObjectResult(new ActionDataResponse<ProductView>(product));
                 }
                 else
                 {

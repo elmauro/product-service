@@ -16,7 +16,7 @@ namespace MC.ProductService.API.Data.Models
         /// <summary>
         /// Gets or sets the name of the product.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the status of the product, indicating if is Active or Not.
@@ -31,7 +31,7 @@ namespace MC.ProductService.API.Data.Models
         /// <summary>
         /// Gets or sets a description of the product.
         /// </summary>
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the price of the product. This is the cost for one unit.
@@ -41,12 +41,12 @@ namespace MC.ProductService.API.Data.Models
         /// <summary>
         /// Gets or sets the identifier for the user who created the product.
         /// </summary>
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the identifier for the last user who updated the product.
         /// </summary>
-        public string LastUpdatedBy { get; set; }
+        public string LastUpdatedBy { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the date and time when the product was initially created.
