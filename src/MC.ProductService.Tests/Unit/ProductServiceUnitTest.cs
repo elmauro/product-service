@@ -11,7 +11,6 @@ using MC.ProductService.API.Services.v1.Commands;
 using MC.ProductService.API.Services.v1.Queries;
 using MC.ProductService.Tests.Fixtures;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -48,14 +47,10 @@ namespace MC.ProductService.Tests.Unit
             _addHandler = new AddProductHandler(
                 _repositoryMock.Object,
                 _mapperMock.Object,
-                _httpClientMockApiMock.Object,
-                _statusCacheServiceMock.Object,
                 _loggerAddMock.Object);
             _updateHandler = new UpdateProductHandler(
                 _repositoryMock.Object,
                 _mapperMock.Object,
-                _httpClientMockApiMock.Object,
-                _statusCacheServiceMock.Object,
                 _loggerUpdateMock.Object);
         }
 

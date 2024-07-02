@@ -12,7 +12,7 @@ COPY . .
 RUN dotnet build MC.ProductService.sln -c Release
 
 # Publish the application
-RUN dotnet publish MC.ProductService.sln -c Release --output /out/
+RUN dotnet publish MC.ProductService.sln --no-restore -c Release --output /out/
 
 #######################################################
 # Step 2: Run the build outcome in a container        #
