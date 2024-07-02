@@ -1,12 +1,23 @@
 # Product-Service API Documentation
 
-## Implemented Patterns
+## Introduction
+
+This API helps manage product information for businesses. It makes it easier to add, update, and get data about products.
+
+In this document, we will talk about:
+
+- **Design Patterns Used**
+- **Basic Requirements**
+- **How to Install**
+- **How to Check Code Quality with SonarQube**
+
+## Design Patterns Used
 
 - Repository Pattern: Abstraction of the logic Access Data
 - Cqrs Pattern: Separates read and write operations in an application
 - Mediator Pattern: Reduce direct dependencies between objects
 
-## Assumptions
+## Basic Requirements
 
 Before you begin, ensure that your system meets the following prerequisites:
 
@@ -25,7 +36,7 @@ Before you begin, ensure that your system meets the following prerequisites:
 - docker-compose
 - Git (version control): [Download from Git](https://git-scm.com/)
 
-## Installation
+## How to Install
 
 **Clone the repository**
 ```sh
