@@ -9,7 +9,6 @@ In this document, we will talk about:
 - **Design Patterns Used**
 - **Basic Requirements**
 - **How to Install**
-- **How to Check Code Quality with SonarQube**
 
 ## Design Patterns Used
 
