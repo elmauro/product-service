@@ -1,14 +1,18 @@
 version: '3.7'
 
-# Allows these services to be compatible with existing personal services (mesh)
+# Network Configuration
 networks:
   personal-services:
     driver: bridge
 
+# Volume Configuration
 volumes:
   postgresql-data-product:
 
+# Services Configuration
 services:
+  # Product Service
+  # This service runs the .NET Core application container, built from a Dockerfile in the current context.
   product:
     container_name: product
     build:
@@ -22,6 +26,9 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "DockerDev"
 
+  # Product PostgreSQL Database
+  # This service uses the official PostgreSQL 13 image, configured with environment variables for user and password.
+  # It includes volume mappings for data persistence and script management.
   product-postgres:
     image: postgres:13
     container_name: product-postgres
