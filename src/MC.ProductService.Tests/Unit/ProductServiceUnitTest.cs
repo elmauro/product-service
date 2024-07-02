@@ -7,8 +7,11 @@ using MC.ProductService.API.Data.Models;
 using MC.ProductService.API.Data.Repositories;
 using MC.ProductService.API.Infrastructure;
 using MC.ProductService.API.Options;
+using MC.ProductService.API.Services.v1.Commands;
+using MC.ProductService.API.Services.v1.Queries;
 using MC.ProductService.Tests.Fixtures;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -21,8 +24,12 @@ namespace MC.ProductService.Tests.Unit
         private readonly Mock<IMapper> _mapperMock;
         private readonly Mock<IStatusCacheService> _statusCacheServiceMock;
         private readonly Mock<IHttpClientMockApi> _httpClientMockApiMock;
-        private readonly Mock<ILogger<API.Services.v1.ProductService>> _loggerMock;
-        private readonly API.Services.v1.ProductService _productService;
+        private readonly Mock<ILogger<GetProductByIdHandler>> _loggerGetMock;
+        private readonly Mock<ILogger<AddProductHandler>> _loggerAddMock;
+        private readonly Mock<ILogger<UpdateProductHandler>> _loggerUpdateMock;
+        private readonly GetProductByIdHandler _getHandler;
+        private readonly AddProductHandler _addHandler;
+        private readonly UpdateProductHandler _updateHandler;
 
         public ProductServiceUnitTest()
         {
@@ -30,14 +37,26 @@ namespace MC.ProductService.Tests.Unit
             _mapperMock = new Mock<IMapper>();
             _statusCacheServiceMock = new Mock<IStatusCacheService>();
             _httpClientMockApiMock = new Mock<IHttpClientMockApi>();
-            _loggerMock = new Mock<ILogger<API.Services.v1.ProductService>>();
-            _productService = new API.Services.v1.ProductService(
+            _loggerGetMock = new Mock<ILogger<GetProductByIdHandler>>();
+            _loggerAddMock = new Mock<ILogger<AddProductHandler>>();
+            _loggerUpdateMock = new Mock<ILogger<UpdateProductHandler>>();
+            _getHandler = new GetProductByIdHandler(
+                _repositoryMock.Object,
+                _httpClientMockApiMock.Object,
+                _statusCacheServiceMock.Object,
+                _loggerGetMock.Object);
+            _addHandler = new AddProductHandler(
                 _repositoryMock.Object,
                 _mapperMock.Object,
                 _httpClientMockApiMock.Object,
-                _statusCacheServiceMock.Object,                
-                _loggerMock.Object
-            );
+                _statusCacheServiceMock.Object,
+                _loggerAddMock.Object);
+            _updateHandler = new UpdateProductHandler(
+                _repositoryMock.Object,
+                _mapperMock.Object,
+                _httpClientMockApiMock.Object,
+                _statusCacheServiceMock.Object,
+                _loggerUpdateMock.Object);
         }
 
         [Fact]
@@ -49,7 +68,7 @@ namespace MC.ProductService.Tests.Unit
                 .ReturnsAsync((ProductView?)null);
 
             // Act
-            var result = await _productService.GetProductByIdAsync(productId);
+            var result = await _getHandler.Handle(new GetProductByIdQuery(productId), CancellationToken.None);
 
             // Assert
             result.Should().BeOfType<NotFoundResult>();
@@ -69,7 +88,7 @@ namespace MC.ProductService.Tests.Unit
                 .ReturnsAsync((true, new List<MockProductResponse> { new MockProductResponse { ProductId = "1", Discount = "10" } }));
 
             // Act
-            var result = await _productService.GetProductByIdAsync(productId);
+            var result = await _getHandler.Handle(new GetProductByIdQuery(productId), CancellationToken.None);
 
             // Assert
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
@@ -96,7 +115,7 @@ namespace MC.ProductService.Tests.Unit
                 .ReturnsAsync((false, null));
 
             // Act
-            var result = await _productService.GetProductByIdAsync(productId);
+            var result = await _getHandler.Handle(new GetProductByIdQuery(productId), CancellationToken.None);
 
             // Assert
             result.Should().BeOfType<ObjectResult>();
@@ -118,7 +137,7 @@ namespace MC.ProductService.Tests.Unit
                 .Returns(Task.CompletedTask);
 
             // Act
-            var result = await _productService.AddProductAsync(productRequest);
+            var result = await _addHandler.Handle(new AddProductCommand(productRequest), CancellationToken.None);
 
             // Assert
             var createdAtActionResult = result.Should().BeOfType<CreatedAtActionResult>().Subject;
@@ -137,7 +156,7 @@ namespace MC.ProductService.Tests.Unit
                 .Throws(new Exception("Test exception"));
 
             // Act
-            var result = await _productService.AddProductAsync(productRequest);
+            var result = await _addHandler.Handle(new AddProductCommand(productRequest), CancellationToken.None);
 
             // Assert
             result.Should().BeOfType<ObjectResult>();
@@ -167,7 +186,7 @@ namespace MC.ProductService.Tests.Unit
                 .Returns(Task.CompletedTask);
 
             // Act
-            var result = await _productService.UpdateProductAsync(productId, productRequest);
+            var result = await _updateHandler.Handle(new UpdateProductCommand(productId, productRequest), CancellationToken.None);
 
             // Assert
             result.Should().BeOfType<NoContentResult>();
@@ -184,7 +203,7 @@ namespace MC.ProductService.Tests.Unit
                 .ReturnsAsync((Product?)null);
 
             // Act
-            var result = await _productService.UpdateProductAsync(productId, productRequest);
+            var result = await _updateHandler.Handle(new UpdateProductCommand(productId, productRequest), CancellationToken.None);
 
             // Assert
             result.Should().BeOfType<NotFoundResult>();
@@ -201,7 +220,8 @@ namespace MC.ProductService.Tests.Unit
                 .Throws(new Exception("Test exception"));
 
             // Act
-            var result = await _productService.UpdateProductAsync(productId, productRequest);
+            var result = await _updateHandler.Handle(new UpdateProductCommand(productId, productRequest), CancellationToken.None);
+
 
             // Assert
             result.Should().BeOfType<ObjectResult>();
