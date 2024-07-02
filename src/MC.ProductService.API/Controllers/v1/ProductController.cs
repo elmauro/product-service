@@ -1,7 +1,9 @@
 ﻿using MC.ProductService.API.ClientModels;
-using MC.ProductService.API.Services.v1;
 using MC.ProductService.API.Options;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using MC.ProductService.API.Services.v1.Queries;
+using MC.ProductService.API.Services.v1.Commands;
 namespace MC.ProductService.API.Controllers.v1
 {
     [ApiController]
@@ -9,10 +11,10 @@ namespace MC.ProductService.API.Controllers.v1
     [Produces("application/json")]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        private readonly IMediator _mediator;
+        public ProductController(IMediator mediator)
         {
-            _productService = productService;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace MC.ProductService.API.Controllers.v1
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(Guid productId)
         {
-            return await _productService.GetProductByIdAsync(productId);
+            return await _mediator.Send(new GetProductByIdQuery(productId));
         }
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace MC.ProductService.API.Controllers.v1
         [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] ProductRequest product)
         {
-            return await _productService.AddProductAsync(product);
+            return await _mediator.Send(new AddProductCommand(product));
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace MC.ProductService.API.Controllers.v1
         [ProducesResponseType(typeof(ErrorResponse),  StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromRoute] Guid productId, [FromBody] ProductRequest product)
         {
-            return await _productService.UpdateProductAsync(productId, product);
+            return await _mediator.Send(new UpdateProductCommand(productId, product));
         }
     }
 }

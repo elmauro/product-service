@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using MC.ProductService.API.Infrastructure;
 using MC.ProductService.API.Options;
+using System.Reflection;
+using MediatR;
+using MC.ProductService.API.Services.v1.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +35,6 @@ builder.Services.AddDbContext<ProductDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("postgresdb")));
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddHttpClient<IHttpClientMockApi, HttpClientMockApiService>();
 builder.Services.AddSingleton<IStatusCacheService, StatusCacheService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -45,6 +47,11 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 
 ConfigureSwaggerOptions.AddSwagger(builder.Services);
+
+// Agrega MediatR
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+});
 
 var app = builder.Build();
 
