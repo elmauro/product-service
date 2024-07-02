@@ -1,4 +1,11 @@
 # Product-Service API Documentation
+
+## Implemented Patterns
+
+- Repository Pattern: Abstraction of the logic Access Data
+- Cqrs Pattern: Separates read and write operations in an application
+- Mediator Pattern: Reduce direct dependencies between objects
+
 ## Assumptions
 
 Before you begin, ensure that your system meets the following prerequisites:
