@@ -2,7 +2,6 @@
 using MC.ProductService.API.Data.Repositories;
 using MC.ProductService.API.Infrastructure;
 using MC.ProductService.API.Options;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MC.ProductService.API.Services.v1.Queries
@@ -10,14 +9,10 @@ namespace MC.ProductService.API.Services.v1.Queries
     /// <summary>
     /// Handles the retrieval of product details by product ID.
     /// </summary>
-    public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, IActionResult>
+    public class GetProductByIdHandler : ProductHandlerBase<GetProductByIdQuery>
     {
-        private readonly IProductRepository _repository;
         private readonly IHttpClientMockApi _httpClientMockApi;
         private readonly IStatusCacheService _statusCacheService;
-        private readonly ILogger<GetProductByIdHandler> _logger;
-
-        private readonly string _internalServerErrorMessage = "Something went wrong, please try again later.";
 
         /// <summary>
         /// New instance of the <see cref="GetProductByIdHandler"/>.
@@ -30,24 +25,10 @@ namespace MC.ProductService.API.Services.v1.Queries
             IProductRepository repository,
             IHttpClientMockApi httpClientMockApi,
             IStatusCacheService statusCacheService,
-            ILogger<GetProductByIdHandler> logger)
+            ILogger<GetProductByIdHandler> logger) : base(repository, logger)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _httpClientMockApi = httpClientMockApi ?? throw new ArgumentNullException(nameof(httpClientMockApi));
             _statusCacheService = statusCacheService ?? throw new ArgumentNullException(nameof(statusCacheService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        /// <summary>
-        /// Generates an ObjectResult for internal server errors.
-        /// </summary>
-        /// <returns>An ObjectResult configured for HTTP 500 Internal Server Error.</returns>
-        private ObjectResult GetErrorObjectResult()
-        {
-            return new ObjectResult((object)_internalServerErrorMessage)
-            {
-                StatusCode = StatusCodes.Status500InternalServerError
-            };
         }
 
         /// <summary>
@@ -58,7 +39,7 @@ namespace MC.ProductService.API.Services.v1.Queries
         /// <returns>The result contains the <see cref="ProductView"/> 
         /// corresponding to the specified product ID. Returns null if no product is found with the provided ID.
         /// </returns>
-        public async Task<IActionResult> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+        public override async Task<IActionResult> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
