@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using MC.ProductService.API.Services.v1.Queries;
 using MC.ProductService.API.Services.v1.Commands;
-using System.Numerics;
 namespace MC.ProductService.API.Controllers.v1
 {
     [ApiController]
