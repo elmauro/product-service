@@ -76,16 +76,14 @@ namespace MC.ProductService.API.Data.Repositories
 
         public async Task UpdateProductAsync(Product product)
         {
-            var existingProduct = await _context.Products.FindAsync(product.ProductId);
-            if (existingProduct != null)
-            {
-                _context.Entry(existingProduct).CurrentValues.SetValues(product);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new InvalidOperationException(ProductNotFound);
-            }
+            // Attach the product to the context
+            _context.Products.Attach(product);
+
+            // Update the entity state to Modified
+            _context.Entry(product).State = EntityState.Modified;
+
+            // Save changes asynchronously
+            await _context.SaveChangesAsync();
         }
     }
 
