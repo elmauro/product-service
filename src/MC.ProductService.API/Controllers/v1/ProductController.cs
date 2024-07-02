@@ -33,7 +33,8 @@ namespace MC.ProductService.API.Controllers.v1
         }
 
         /// <summary>
-        /// Adds a new product. Please review the productId generated in the response headers' location field
+        /// Adds a new product. Please review the 'productId' generated, which is returned in the response headers' 'Location' field. 
+        /// This 'productId' can be used for querying or updating the product information in subsequent requests.
         /// </summary>
         /// <param name="product">The product information to add.</param>
         /// <response code="201">The product was successfully created.</response> 
