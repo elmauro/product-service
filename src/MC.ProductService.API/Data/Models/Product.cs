@@ -3,58 +3,57 @@
 namespace MC.ProductService.API.Data.Models
 {
     /// <summary>
-    /// Product entity in the system. This class implements the <see cref="IResource"/> interface,
-    /// indicating it is a resource that can be managed and persisted within the system.
+    /// This class represents a product in the system. It allows the product to be saved and found in the database.
     /// </summary>
     public class Product : IResource
     {
         /// <summary>
-        /// The unique identifier for the product. By default, it is initialized to a new GUID string.
+        /// unique identifier for the product. It is created automatically.
         /// </summary>
         public string ProductId { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
-        /// The name of the product.
+        /// The name given to the product.
         /// </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// The status of the product, indicating if is Active or Not.
+        /// Indicates whether the product is available (1) or not (0).
         /// </summary>
         public int Status { get; set; } = 0;
 
         /// <summary>
-        /// The stock level of the product, representing how many units are available.
+        /// The number of these products currently available for sale.
         /// </summary>
         public int Stock { get; set; }
 
         /// <summary>
-        /// A description of the product.
+        /// A short explanation of what the product is or what it does.
         /// </summary>
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
-        /// The price of the product. This is the cost for one unit.
+        /// How much one unit of the product costs.
         /// </summary>
         public int Price { get; set; }
 
         /// <summary>
-        /// The identifier for the user who created the product.
+        /// The identification of the person who first added the product to the system.
         /// </summary>
         public string CreatedBy { get; set; } = string.Empty;
 
         /// <summary>
-        /// The identifier for the last user who updated the product.
+        /// The identification of the last person to make changes to the product details.
         /// </summary>
         public string LastUpdatedBy { get; set; } = string.Empty;
 
         /// <summary>
-        /// The date and time when the product was initially created.
+        /// The exact date and time when the product was added to the system.
         /// </summary>
         public DateTimeOffset CreatedAt { get; set; }
 
         /// <summary>
-        /// The date and time when the product was last updated.
+        /// The last time the product details were changed.
         /// </summary>
         public DateTimeOffset LastUpdatedAt { get; set; }
     }

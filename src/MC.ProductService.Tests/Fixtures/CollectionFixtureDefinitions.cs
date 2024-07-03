@@ -9,19 +9,16 @@ namespace MC.ProductService.Tests.Fixtures
     public static class TestCollections
     {
         /// <summary>
-        /// Generic test collection where most tests should be able to live.
-        /// Ensures that only one instance of the service and its dependencies are used
-        /// for all test classes that use this fixture.
+        /// A common place for most tests to use. This setup helps ensure that tests are not 
+        /// stepping on each other by sharing one setup of the service and its dependencies.
         /// </summary>
         public const string Integration = nameof(Integration);
     }
 
     /// <summary>
-    /// All test classes marked with this collection name will run with a shared
-    /// instance of the integration fixture, which is useful for saving time on the expensive
-    /// operation of re-upping the db if we don't need to for each test class.
-    ///
-    /// It can also prevent wonkiness from deleting the db between test runs.
+    /// When test classes use this label, they share one setup of the database.
+    /// This is faster because we don't have to set up the database from scratch for each test class.
+    /// It also avoids problems caused by deleting and recreating the database each time.
     /// </summary>
     [CollectionDefinition(TestCollections.Integration)]
     public class DatabaseCollection : ICollectionFixture<ProductApplicationFixture>

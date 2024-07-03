@@ -4,21 +4,20 @@ using System.Net.Http;
 namespace MC.ProductService.API.Infrastructure
 {
     /// <summary>
-    /// Defines methods for caching status information.
+    /// This interface defines methods to get status information that is stored temporarily.
     /// </summary>
     public interface IStatusCacheService
     {
         /// <summary>
-        /// Retrieves the status name corresponding to the provided status key.
+        /// Gets the name of a status based on a status key.
         /// </summary>
-        /// <param name="statusKey">The key representing the status.</param>
-        /// <returns>The name of the status corresponding to the provided key.</returns>
-
+        /// <param name="statusKey">The number that represents a specific status.</param>
+        /// <returns>The name of the status linked to the given key.</returns>
         string GetStatusName(int statusKey);
     }
 
     /// <summary>
-    /// Provides caching functionality for status information.
+    /// This class manages storing and retrieving status information in a temporary memory space.
     /// </summary>
     public class StatusCacheService : IStatusCacheService
     {
@@ -27,10 +26,10 @@ namespace MC.ProductService.API.Infrastructure
         private readonly ILogger<StatusCacheService> _logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatusCacheService"/> class.
+        /// Creates a new service to manage cached status information.
         /// </summary>
-        /// <param name="memoryCache">The memory cache instance to be used for caching.</param>
-        /// <param name="logger">The logger instance for logging.</param>
+        /// <param name="memoryCache">The tool used to save data temporarily.</param>
+        /// <param name="logger">The tool used to record what happens during operations.</param>
         public StatusCacheService(IMemoryCache memoryCache, ILogger<StatusCacheService> logger)
         {
             _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
@@ -41,37 +40,38 @@ namespace MC.ProductService.API.Infrastructure
         {
             if (!_memoryCache.TryGetValue(CacheKey, out Dictionary<int, string>? statusDictionary))
             {
-                _logger.LogInformation("Cache miss for status dictionary. Regenerating...");
+                _logger.LogInformation("No saved data for status. Making new...");
 
-                // The cache entry has expired or doesn't exist, so generate a new dictionary
+                // If the status information isn't saved, create a new list of statuses
                 statusDictionary = GetStatusDictionary();
 
-                // Set cache entry options: 5 minutes sliding expiration
+                // Settings for how long to save the data: renews every 5 minutes
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                     .SetSlidingExpiration(TimeSpan.FromMinutes(5));
 
-                // Save the dictionary in the cache
+                // Save the new list in the memory cache
                 _memoryCache.Set(CacheKey, statusDictionary, cacheEntryOptions);
             }
 
+            // Try to get the status name using the key; if it's not there, log a warning and return "Unknown"
             if (statusDictionary != null && statusDictionary.TryGetValue(statusKey, out string? statusName))
             {
                 return statusName;
             }
             else
             {
-                _logger.LogWarning("Status key {StatusKey} not found in status dictionary", statusKey);
+                _logger.LogWarning("Could not find the status key {StatusKey} in the list", statusKey);
                 return "Unknown";
             }
         }
 
         /// <summary>
-        /// Generates the dictionary containing status key-value pairs.
+        /// Creates a list of statuses with their names.
         /// </summary>
-        /// <returns>A dictionary with status keys and their corresponding status names.</returns>
+        /// <returns>A list showing each status number and what it means.</returns>
         private Dictionary<int, string> GetStatusDictionary()
         {
-            // Define the dictionary of status values
+            // A simple list of status numbers and their meanings
             return new Dictionary<int, string>
             {
                 { 1, "Active" },

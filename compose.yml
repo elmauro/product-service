@@ -1,18 +1,18 @@
 version: '3.7'
 
-# Network Configuration
+# Setting up a network for our containers to talk to each other
 networks:
   personal-services:
     driver: bridge
 
-# Volume Configuration
+# Creating a place to keep database data safe
 volumes:
   postgresql-data-product:
 
-# Services Configuration
+# Describing the containers we want to run
 services:
   # Product Service
-  # This service runs the .NET Core application container, built from a Dockerfile in the current context.
+  # This container runs our main app, made from a Dockerfile.
   product:
     container_name: product
     build:
@@ -27,13 +27,13 @@ services:
       ASPNETCORE_ENVIRONMENT: "DockerDev"
 
   # Product PostgreSQL Database
-  # This service uses the official PostgreSQL 13 image, configured with environment variables for user and password.
-  # It includes volume mappings for data persistence and script management.
+  # This container uses a PostgreSQL database to store data.
+  # We set it up with a username and password and make sure data is saved even if the container restarts.
   product-postgres:
     image: postgres:13
     container_name: product-postgres
     restart: unless-stopped
-    # mounts db data to file system so data is not lost when re-creating the container.
+    # Saves database data to a special place so we don't lose it when restarting the container.
     volumes:
       - postgresql-data-product:/var/lib/postgresql/data
       - ./.db:/scripts
