@@ -4,10 +4,10 @@ using System.Linq.Expressions;
 namespace MC.ProductService.API.ClientModels
 {
     /// <summary>
-    /// Provides a lambda expression that projects a <see cref="Product"/> entity to a <see cref="ProductView"/> model.
+    /// Projects a <see cref="Product"/> entity to a <see cref="ProductView"/> model.
     /// </summary>
     /// <returns>
-    /// An expression that maps properties from the <see cref="Product"/> entity to the <see cref="ProductView"/> model
+    /// A formula that helps convert a Product's data into a ProductView format.
     /// </returns>
     public class ProductView
     {
@@ -30,27 +30,18 @@ namespace MC.ProductService.API.ClientModels
         public string ProductId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the status name of the product. This is a calculated field.
+        /// A word or phrase that describes the product's current status.
         /// </summary>
-        /// <value>The status name of the product.</value>
         public string StatusName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the discount applied to the product. This is a percentage value that represents
-        /// the reduction from the original price. This is a calculated field.
+        /// The percentage off the original price as a discount.
         /// </summary>
-        /// <value>
-        /// The discount percentage applied to the product price.
-        /// </value>
         public int Discount { get; set; }
 
         /// <summary>
-        /// Gets or sets the final price of the product after applying the discount.
-        /// Is the amount that the customer would be expected to pay. This is a calculated field.
+        /// The price of the product after the discount has been applied.
         /// </summary>
-        /// <value>
-        /// The final price of the product after discount.
-        /// </value>
         public decimal FinalPrice { get; set; }
 
         /// <see cref="Product.CreatedBy"/>
@@ -65,6 +56,9 @@ namespace MC.ProductService.API.ClientModels
         /// <see cref="Product.LastUpdatedAt"/>
         public DateTimeOffset LastUpdatedAt { get; set; }
 
+        /// <summary>
+        /// Provides a way to automatically create a ProductView from a Product.
+        /// </summary>
         public static Expression<Func<Product, ProductView>> Project() => product => new ProductView
         {
             ProductId = product.ProductId,

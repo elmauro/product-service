@@ -1,18 +1,19 @@
 ﻿namespace MC.ProductService.API.ClientModels
 {
     /// <summary>
-    /// Represents a mock response for a product with its discount information.
+    /// Represents a simplified or fake response for a product, including any discount details.
+    /// This class is typically used for testing or mock-up purposes to simulate how real data would be handled.
     /// </summary>
     public class MockProductResponse
     {
         /// <summary>
-        /// Gets or sets the product identifier.
+        /// The unique identifier for the product.
         /// </summary>
         /// <value>The identifier of the product.</value>
         public string ProductId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the discount applied to the product.
+        /// Details about any discount applied to the product.
         /// </summary>
         /// <value>The discount information of the product.</value>
         public string Discount { get; set; } = string.Empty;

@@ -5,18 +5,18 @@ using MC.ProductService.API.Data.Models;
 namespace MC.Insurance.ApplicationServicesTest.Fixtures
 {
     /// <summary>
-    /// Provides mocked data instances for testing purposes within the insurance product services.
-    /// Utilizes AutoFixture to generate random, valid data for test consistency and isolation.
+    /// Provides fake data for testing the insurance product services.
+    /// Uses AutoFixture to automatically create realistic and random data for thorough and independent tests.
     /// </summary>
     public static class ProductMockingData
     {
         public static Fixture fixture = new Fixture();
 
         /// <summary>
-        /// Generates a ProductRequest object with randomized properties.
-        /// Status is an integer that is randomized to either 0 or 1, ensuring varied test scenarios.
+        /// Creates a new ProductRequest object with random values.
+        /// The 'Status' property is either 0 or 1, chosen randomly, to test different scenarios.
         /// </summary>
-        /// <returns>A ProductRequest object with random values, particularly Status set to 0 or 1.</returns>
+        /// <returns>A new ProductRequest with random values, including a 'Status' that is either 0 or 1.</returns>
         public static ProductRequest GetProductRequest()
         {
             var status = fixture.Create<int>() % 2;
@@ -27,11 +27,10 @@ namespace MC.Insurance.ApplicationServicesTest.Fixtures
         }
 
         /// <summary>
-        /// Creates a Product data model instance with randomized properties.
-        /// ProductId is a new unique GUID for each call.
-        /// Timestamps for creation and last update are set to the current UTC time
+        /// Generates a new Product object each time it's called, with unique identifiers and timestamps.
+        /// The 'ProductId' is a unique GUID, and the 'CreatedAt' and 'LastUpdatedAt' timestamps are set to the current time.
         /// </summary>
-        /// <returns>A Product object with unique GUID and current UTC timestamps for CreatedAt and LastUpdatedAt.</returns>
+        /// <returns>A new Product with a unique ID and current timestamps for when it was created and last updated.</returns>
         public static Product GetProduct() {
 			return fixture.Build<Product>()
                 .With(p => p.ProductId, Guid.NewGuid().ToString())

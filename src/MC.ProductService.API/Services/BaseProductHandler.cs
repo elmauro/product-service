@@ -14,7 +14,7 @@ namespace MC.ProductService.API.Services
         protected const string systemUser = "system";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductHandlerBase<typeparamref name="T"/>"/> class.
+        /// Initializes a new instance of the ProductHandlerBase class.
         /// </summary>
         /// <param name="repository">The product repository.</param>
         /// <param name="mapper">Automapper to map entity and model data.</param>

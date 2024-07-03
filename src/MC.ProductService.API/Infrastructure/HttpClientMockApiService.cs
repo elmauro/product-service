@@ -4,19 +4,19 @@ using System.Text.Json;
 namespace MC.ProductService.API.Infrastructure
 {
     /// <summary>
-    /// Defines methods for interacting with a mock API to get product discount information.
+    /// This interface provides methods to get discount information about products from a fake API.
     /// </summary>
     public interface IHttpClientMockApi
     {
         /// <summary>
-        /// Asynchronously gets the product discount information.
+        /// Asks the fake API for discount information about products.
         /// </summary>
-        /// <returns>The result contains a tuple with a success flag and the list of product responses.</returns>
-        public Task<(bool IsSuccess, List<MockProductResponse>? SuccessResult)> GetProductDiscountAsync();
+        /// <returns>A result that says whether the request was successful and gives a list of product discounts if it was.</returns>
+        Task<(bool IsSuccess, List<MockProductResponse>? SuccessResult)> GetProductDiscountAsync();
     }
 
     /// <summary>
-    /// Provides implementation for interacting with a mock API to get product discount information.
+    /// This class handles getting discount information about products from a fake API.
     /// </summary>
     public class HttpClientMockApiService : IHttpClientMockApi
     {
@@ -31,11 +31,10 @@ namespace MC.ProductService.API.Infrastructure
         private const string ProductRoute = "https://6680a0be56c2c76b495c7127.mockapi.io/v1/product";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpClientMockApiService"/> class.
+        /// Sets up the service with an HTTP client and a logger.
         /// </summary>
-        /// <param name="httpClient">The HTTP client used to make requests.</param>
-        /// <param name="logger">The logger instance for logging.</param>
-
+        /// <param name="httpClient">The client that will send requests to the API.</param>
+        /// <param name="logger">A tool that records what happens during the operations.</param>
         public HttpClientMockApiService(
             HttpClient httpClient,
             ILogger<HttpClientMockApiService> logger)
@@ -52,11 +51,11 @@ namespace MC.ProductService.API.Infrastructure
         }
 
         /// <summary>
-        /// Executes an HTTP request and processes the response.
+        /// Runs an HTTP request and handles the response.
         /// </summary>
-        /// <typeparam name="T">The type of the success result.</typeparam>
-        /// <param name="request">The function that performs the HTTP request.</param>
-        /// <returns>The result contains a tuple with a success flag and the success result.</returns>
+        /// <typeparam name="T">The type of data we expect if the request succeeds.</typeparam>
+        /// <param name="request">The action that makes the HTTP request.</param>
+        /// <returns>A result that includes whether the request succeeded and the data if it did.</returns>
         private async Task<(bool IsSuccess, T? SuccessResult)> ExecuteAsync<T>(Func<Task<HttpResponseMessage>> request)
         {
             var result = (IsSuccess: false, SuccessResult: default(T));
