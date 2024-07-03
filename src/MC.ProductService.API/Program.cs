@@ -17,8 +17,6 @@ using MC.ProductService.API.Services.v1.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure the app and set up services
-
 // Setting up logging with Serilog using settings from the app's configuration
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
@@ -29,7 +27,6 @@ builder.Services.AddHttpLogging(logging =>
     logging.LoggingFields = HttpLoggingFields.Duration;
 });
 
-// Adds support for controllers
 builder.Services.AddControllers();
 
 // Adds caching services to store data in memory
@@ -47,7 +44,6 @@ builder.Services.AddSingleton<IStatusCacheService, StatusCacheService>();
 // Registers AutoMapper to manage object-object mapping
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// Adds API documentation toolsv
 builder.Services.AddEndpointsApiExplorer();
 
 // Sets up Fluent Validation for validating models
@@ -67,8 +63,6 @@ var app = builder.Build();
 // Middleware to enable HTTP logging
 app.UseHttpLogging();
 
-// HTTP request pipeline setup
-
 // If the app is not in production, enable Swagger UI
 if (!app.Environment.IsProduction())
 {
@@ -87,16 +81,12 @@ if (!app.Environment.IsProduction())
 // Logs HTTP requests using Serilog
 app.UseSerilogRequestLogging();
 
-// Forces HTTPS for secure connections
 app.UseHttpsRedirection();
 
-// Middleware for authorization
 app.UseAuthorization();
 
-// Maps controller endpoints
 app.MapControllers();
 
-// Starts the application
 app.Run();
 
 // Indicates the part of the program to exclude from code coverage measurement
