@@ -4,7 +4,7 @@ using System.Net.Http;
 namespace MC.ProductService.API.Infrastructure
 {
     /// <summary>
-    /// This interface defines methods to get status information that is stored temporarily.
+    /// Defines methods for caching status information.
     /// </summary>
     public interface IStatusCacheService
     {
@@ -17,7 +17,7 @@ namespace MC.ProductService.API.Infrastructure
     }
 
     /// <summary>
-    /// This class manages storing and retrieving status information in a temporary memory space.
+    /// Provides caching functionality for status information.
     /// </summary>
     public class StatusCacheService : IStatusCacheService
     {
@@ -28,8 +28,8 @@ namespace MC.ProductService.API.Infrastructure
         /// <summary>
         /// Creates a new service to manage cached status information.
         /// </summary>
-        /// <param name="memoryCache">The tool used to save data temporarily.</param>
-        /// <param name="logger">The tool used to record what happens during operations.</param>
+        /// <param name="memoryCache">The memory cache instance to be used for caching.</param>
+        /// <param name="logger">The logger instance for logging.</param>
         public StatusCacheService(IMemoryCache memoryCache, ILogger<StatusCacheService> logger)
         {
             _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));

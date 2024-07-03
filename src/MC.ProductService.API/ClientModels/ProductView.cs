@@ -4,42 +4,29 @@ using System.Linq.Expressions;
 namespace MC.ProductService.API.ClientModels
 {
     /// <summary>
-    /// This class creates a way to turn a Product into a ProductView model.
-    /// It takes the details from a Product and sets up a ProductView with those same details.
+    /// Projects a <see cref="Product"/> entity to a <see cref="ProductView"/> model.
     /// </summary>
     /// <returns>
     /// A formula that helps convert a Product's data into a ProductView format.
     /// </returns>
     public class ProductView
     {
-        /// <summary>
-        /// The name of the product.
-        /// </summary>
+        /// <see cref="Product.Name"/>
         public string Name { get; set; } = string.Empty;
 
-        /// <summary>
-        /// The current state of the product, like whether it's active or not.
-        /// </summary>
+        /// <see cref="Product.Status"/>
         public int Status { get; set; }
 
-        /// <summary>
-        /// How many units of the product are available.
-        /// </summary>
+        /// <see cref="Product.Stock"/>
         public int Stock { get; set; }
 
-        /// <summary>
-        /// A description of what the product is.
-        /// </summary>
+        /// <see cref="Product.Description"/>
         public string Description { get; set; } = string.Empty;
 
-        /// <summary>
-        /// The price of the product.
-        /// </summary>
+        /// <see cref="Product.Price"/>
         public int Price { get; set; }
 
-        /// <summary>
-        /// The unique code assigned to the product.
-        /// </summary>
+        /// <see cref="Product.ProductId"/>
         public string ProductId { get; set; } = string.Empty;
 
         /// <summary>
@@ -57,24 +44,16 @@ namespace MC.ProductService.API.ClientModels
         /// </summary>
         public decimal FinalPrice { get; set; }
 
-        /// <summary>
-        /// The ID of the person who first added the product to the system.
-        /// </summary>
+        /// <see cref="Product.CreatedBy"/>
         public string CreatedBy { get; set; } = string.Empty;
 
-        /// <summary>
-        /// The ID of the last person who updated the product's details.
-        /// </summary>
+        /// <see cref="Product.LastUpdatedBy"/>
         public string LastUpdatedBy { get; set; } = string.Empty;
 
-        /// <summary>
-        /// When the product was first added to the system.
-        /// </summary>
+        /// <see cref="Product.CreatedAt"/>
         public DateTimeOffset CreatedAt { get; set; }
 
-        /// <summary>
-        /// The last time the product's details were updated.
-        /// </summary>
+        /// <see cref="Product.LastUpdatedAt"/>
         public DateTimeOffset LastUpdatedAt { get; set; }
 
         /// <summary>
