@@ -84,7 +84,10 @@ To create a product, use the POST method with the desired parameters in the JSON
 
 ![image](https://github.com/elmauro/product-service/assets/9219845/08e0e17d-5def-4df9-b94b-0f95befc9dec)
 
-Execute the request and the method will respond with information about the created product, including the productId in the response headers' location field.
+Execute the request and the method will respond with information about the created product
+
+**Important!**
+The response includes the product ID in the location section of the response headers. You need the product ID to update and access product information.
 
 ![image](https://github.com/elmauro/product-service/assets/9219845/349ef59a-7b21-4e87-b163-56bc1c962704)
 
