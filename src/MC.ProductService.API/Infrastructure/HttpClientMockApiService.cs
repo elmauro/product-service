@@ -55,7 +55,7 @@ namespace MC.ProductService.API.Infrastructure
         /// </summary>
         /// <typeparam name="T">The type of data we expect if the request succeeds.</typeparam>
         /// <param name="request">The action that makes the HTTP request.</param>
-        /// <returns>A result that includes whether the request succeeded and the data if it did.</returns>
+        /// <returns>A result that includes whether the request succeeded and the data.</returns>
         private async Task<(bool IsSuccess, T? SuccessResult)> ExecuteAsync<T>(Func<Task<HttpResponseMessage>> request)
         {
             var result = (IsSuccess: false, SuccessResult: default(T));

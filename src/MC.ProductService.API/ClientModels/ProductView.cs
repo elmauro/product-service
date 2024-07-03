@@ -7,7 +7,7 @@ namespace MC.ProductService.API.ClientModels
     /// Projects a <see cref="Product"/> entity to a <see cref="ProductView"/> model.
     /// </summary>
     /// <returns>
-    /// A formula that helps convert a Product's data into a ProductView format.
+    /// Helps to convert a Product's data into a ProductView format.
     /// </returns>
     public class ProductView
     {
