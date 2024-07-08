@@ -47,7 +47,6 @@ namespace MC.ProductService.API.Data.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly ProductDBContext _context;
-        private const string ProductNotFound = "Product not found.";
 
         public ProductRepository(ProductDBContext context)
         {
