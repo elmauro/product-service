@@ -23,7 +23,7 @@ namespace MC.ProductService.API.Infrastructure
         private readonly HttpClient _client;
         private readonly ILogger<HttpClientMockApiService> _logger;
 
-        private JsonSerializerOptions jsonOptions = new JsonSerializerOptions
+        private readonly JsonSerializerOptions jsonOptions = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };

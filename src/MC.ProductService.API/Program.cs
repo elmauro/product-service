@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using MC.ProductService.API.Validators;
 using MC.ProductService.API.Data.Repositories;
-using MC.ProductService.API.Services.v1;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
@@ -12,8 +11,6 @@ using Serilog;
 using MC.ProductService.API.Infrastructure;
 using MC.ProductService.API.Options;
 using System.Reflection;
-using MediatR;
-using MC.ProductService.API.Services.v1.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +50,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 // Configures Swagger to help create interactive API documentation
 ConfigureSwaggerOptions.AddSwagger(builder.Services);
 
-// Adds MediatR for implementing mediator pattern in handling requestsv
+// Adds MediatR for implementing mediator pattern in handling requests
 builder.Services.AddMediatR(cfg => {
     cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 });
