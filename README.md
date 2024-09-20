@@ -25,6 +25,7 @@ Before you begin, ensure that your system meets the following prerequisites:
 - At least 4 GB of RAM (8 GB or more recommended)
 - Sufficient disk space to install the .NET SDK, development tools, and project dependencies (at least 10 GB of free space recommended)
 - NET 8 SDK installed. Download and install the .NET 8 SDK from the official .NET website: https://dotnet.microsoft.com/download/dotnet/8.0
+- dotnet tool install --global dotnet-ef
 - Docker or Docker Desktop installed https://www.docker.com/
 - docker-compose
 - Git (version control): [Download from Git](https://git-scm.com/)
